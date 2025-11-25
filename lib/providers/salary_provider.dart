@@ -380,13 +380,18 @@ class SalaryProvider with ChangeNotifier {
           taxRate: 10,
         );
 
+        // Assign status based on employee index for sample data
+        // First employee: pending, second: processing, rest: paid for current month
         PaymentStatus status;
         if (month == 0) {
-          status = employee.id.hashCode % 3 == 0
-              ? PaymentStatus.pending
-              : (employee.id.hashCode % 3 == 1
-                  ? PaymentStatus.processing
-                  : PaymentStatus.paid);
+          final employeeIndex = _employees.indexOf(employee);
+          if (employeeIndex == 0) {
+            status = PaymentStatus.pending;
+          } else if (employeeIndex == 1) {
+            status = PaymentStatus.processing;
+          } else {
+            status = PaymentStatus.paid;
+          }
         } else {
           status = PaymentStatus.paid;
         }

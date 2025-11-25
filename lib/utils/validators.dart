@@ -74,7 +74,9 @@ class Validators {
     return null;
   }
 
-  /// Validate IFSC code
+  /// Validate IFSC code (Indian Financial System Code)
+  /// This validates the format for Indian banks: 4 letters + 0 + 6 alphanumeric characters
+  /// For other banking systems, consider using a different validation or making this configurable
   static String? validateIfscCode(String? value) {
     if (value == null || value.isEmpty) {
       return 'IFSC code is required';

@@ -376,10 +376,15 @@ class PdfService {
   }
 
   /// Save PDF to file and return file path
+  /// Throws an exception if the file cannot be written
   Future<String> savePdfToFile(Uint8List pdfBytes, String fileName) async {
-    final directory = await getApplicationDocumentsDirectory();
-    final file = File('${directory.path}/$fileName');
-    await file.writeAsBytes(pdfBytes);
-    return file.path;
+    try {
+      final directory = await getApplicationDocumentsDirectory();
+      final file = File('${directory.path}/$fileName');
+      await file.writeAsBytes(pdfBytes);
+      return file.path;
+    } on FileSystemException catch (e) {
+      throw Exception('Failed to save PDF: ${e.message}');
+    }
   }
 }

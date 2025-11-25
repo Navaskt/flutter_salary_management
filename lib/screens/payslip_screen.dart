@@ -491,8 +491,10 @@ class PayslipScreen extends StatelessWidget {
         companyAddress: '123 Business Park, Tech City',
       );
 
-      final fileName =
-          'Payslip_${employee.name.replaceAll(' ', '_')}_${Formatters.formatMonth(salary.month).replaceAll(' ', '_')}.pdf';
+      // Sanitize filename by removing special characters
+      final sanitizedName = employee.name.replaceAll(RegExp(r'[^\w\s-]'), '').replaceAll(RegExp(r'\s+'), '_');
+      final sanitizedMonth = Formatters.formatMonth(salary.month).replaceAll(RegExp(r'[^\w\s-]'), '').replaceAll(RegExp(r'\s+'), '_');
+      final fileName = 'Payslip_${sanitizedName}_$sanitizedMonth.pdf';
 
       final filePath = await pdfService.savePdfToFile(pdfBytes, fileName);
 
@@ -519,8 +521,10 @@ class PayslipScreen extends StatelessWidget {
         companyAddress: '123 Business Park, Tech City',
       );
 
-      final fileName =
-          'Payslip_${employee.name.replaceAll(' ', '_')}_${Formatters.formatMonth(salary.month).replaceAll(' ', '_')}.pdf';
+      // Sanitize filename by removing special characters
+      final sanitizedName = employee.name.replaceAll(RegExp(r'[^\w\s-]'), '').replaceAll(RegExp(r'\s+'), '_');
+      final sanitizedMonth = Formatters.formatMonth(salary.month).replaceAll(RegExp(r'[^\w\s-]'), '').replaceAll(RegExp(r'\s+'), '_');
+      final fileName = 'Payslip_${sanitizedName}_$sanitizedMonth.pdf';
 
       final filePath = await pdfService.savePdfToFile(pdfBytes, fileName);
 
