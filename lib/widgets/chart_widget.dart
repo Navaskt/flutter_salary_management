@@ -49,8 +49,8 @@ class ChartWidget extends StatelessWidget {
   }
 
   Widget _buildChart(BuildContext context) {
-    final maxY = data.fold<double>(
-        0, (max, item) => (item['amount'] as double) > max ? item['amount'] : max);
+    final maxY = data.fold<double>(0,
+        (max, item) => (item['amount'] as double) > max ? item['amount'] : max);
     final adjustedMaxY = maxY * 1.2;
 
     return BarChart(
@@ -61,7 +61,7 @@ class ChartWidget extends StatelessWidget {
         barTouchData: BarTouchData(
           enabled: true,
           touchTooltipData: BarTouchTooltipData(
-            getTooltipColor: (group) => AppTheme.primaryDark,
+            tooltipBgColor: AppTheme.primaryDark,
             tooltipPadding: const EdgeInsets.all(8),
             tooltipMargin: 8,
             getTooltipItem: (group, groupIndex, rod, rodIndex) {
@@ -215,7 +215,8 @@ class PieChartWidget extends StatelessWidget {
                       PieChartData(
                         sectionsSpace: 2,
                         centerSpaceRadius: 40,
-                        sections: data.entries.toList().asMap().entries.map((entry) {
+                        sections:
+                            data.entries.toList().asMap().entries.map((entry) {
                           final index = entry.key;
                           final label = entry.value.key;
                           final value = entry.value.value;
@@ -236,7 +237,8 @@ class PieChartWidget extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: data.entries.toList().asMap().entries.map((entry) {
+                      children:
+                          data.entries.toList().asMap().entries.map((entry) {
                         final index = entry.key;
                         final label = entry.value.key;
                         final value = entry.value.value;
